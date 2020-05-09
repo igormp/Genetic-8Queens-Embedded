@@ -16,6 +16,7 @@ public:
     uint8_t fitness;
 
     void checkFitness();
+    void mutate();
 };
 
 board::board()
@@ -106,6 +107,13 @@ void board::checkFitness()
             }
         }
     }
+}
+
+void board::mutate()
+{
+    uint8_t temp1 = (std::rand() / ((RAND_MAX + 1u) / 8));
+    uint8_t temp2 = (std::rand() / ((RAND_MAX + 1u) / 8));
+    rows[temp1] = temp2;
 }
 
 class population
