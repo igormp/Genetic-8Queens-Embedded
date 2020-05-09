@@ -5,6 +5,9 @@ class board
 {
 public:
     board();
+    board(
+        std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
+        uint8_t crossoverPoint);
     ~board();
 
     std::array<uint8_t, 8> rows;
@@ -20,6 +23,24 @@ board::board()
     {
         uint8_t randVal = std::rand() / ((RAND_MAX + 1u) / 8);
         rows[i] = randVal;
+    }
+
+    checkFitness();
+}
+
+board::board(std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
+             uint8_t crossoverPoint)
+{
+    //uint8_t crossoverPoint = 1 + (std::rand() / ((RAND_MAX + 1u) / 7));
+
+    // Populates our board
+    for (uint8_t i = 0; i < crossoverPoint; i++)
+    {
+        rows[i] = (*parent1)[i];
+    }
+    for (uint8_t i = crossoverPoint; i < rows.size(); i++)
+    {
+        rows[i] = (*parent2)[i];
     }
 
     checkFitness();
