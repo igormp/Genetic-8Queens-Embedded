@@ -1,5 +1,7 @@
-#include <cstdint>
+#include <algorithm>
 #include <array>
+#include <cstdint>
+#include <vector>
 
 class board
 {
@@ -14,7 +16,6 @@ public:
     uint8_t fitness;
 
     void checkFitness();
-    bool fitnessSort(board *a, board *b);
 };
 
 board::board()
@@ -107,7 +108,34 @@ void board::checkFitness()
     }
 }
 
-bool board::fitnessSort(board *a, board *b)
+class population
 {
-    return a->fitness < b->fitness;
+public:
+    std::vector<board> boards;
+    population(uint8_t size = 50);
+    ~population();
+    void sortPopulation();
+};
+
+population::population(uint8_t size)
+{
+    for (auto i = 0; i < size; i++)
+    {
+        board temp;
+        boards.push_back(temp);
+    }
+
+    sortPopulation();
+}
+
+population::~population()
+{
+}
+
+void population::sortPopulation()
+{
+    std::sort(
+        boards.begin(), boards.end(), [](board a, board b) {
+            return a.fitness < b.fitness;
+        });
 }
