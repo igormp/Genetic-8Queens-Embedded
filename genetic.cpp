@@ -1,16 +1,5 @@
 #include <cstdint>
 #include <array>
-#include <iostream>
-
-const std::array<uint8_t, 8> validValues{1, 2, 4, 8, 16, 32, 64, 128};
-
-uint8_t bitPosition(uint8_t val)
-{
-    uint8_t position = 0;
-    while (val >>= 1)
-        ++position;
-    return position;
-}
 
 class board
 {
