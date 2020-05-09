@@ -14,6 +14,7 @@ public:
     uint8_t fitness;
 
     void checkFitness();
+    bool fitnessSort(board *a, board *b);
 };
 
 board::board()
@@ -104,4 +105,9 @@ void board::checkFitness()
             }
         }
     }
+}
+
+bool board::fitnessSort(board *a, board *b)
+{
+    return a->fitness < b->fitness;
 }
