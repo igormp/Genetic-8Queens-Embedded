@@ -30,7 +30,7 @@ Makefile : ;
 clean :
 	$(call RM,$(OBJDIR))
 flash :
-	st-flash --reset write $(OBJDIR)/GA-8Queens.bin 0x8000000 
+	st-flash --flash=128k --reset write $(OBJDIR)/GA-8Queens.bin 0x8000000 
 
 
 else
