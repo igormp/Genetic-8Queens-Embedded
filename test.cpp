@@ -14,7 +14,7 @@ int main(int argc, char const *argv[])
 
     while (pop.boards[0].fitness != 0)
     {
-        std::cout << "Fitest: ";
+        std::cout << "Fittest: ";
         for (auto &i : pop.boards[0].rows)
         {
             std::cout << " " << unsigned(i);
