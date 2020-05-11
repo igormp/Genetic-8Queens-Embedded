@@ -126,6 +126,7 @@ public:
 
     void sortPopulation();
     void reproduce(uint8_t amount = 50);
+    void selection();
 };
 
 population::population() : population(50)
@@ -171,4 +172,14 @@ void population::reproduce(uint8_t amount)
         boards.push_back(temp);
     }
     sortPopulation();
+}
+
+void population::selection()
+{
+    auto len = boards.size();
+
+    for (auto i = size; i < len; i++)
+    {
+        boards.pop_back();
+    }
 }
