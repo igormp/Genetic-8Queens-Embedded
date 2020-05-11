@@ -9,7 +9,7 @@ public:
     board();
     board(
         std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
-        uint8_t crossoverPoint, uint16_t mutationRatio = 100);
+        uint8_t crossoverPoint, uint16_t mutationRatio = 10);
     ~board();
 
     std::array<uint8_t, 8> rows;
@@ -181,6 +181,12 @@ void population::reproduce(uint32_t amount)
 void population::selection()
 {
     uint32_t len = boards.size();
+
+    // Let's keep diversity in our gene pool
+    for (uint32_t i = 0; i < size / 10; i++)
+    {
+        std::iter_swap(boards.begin() + size - i, boards.end() - i);
+    }
 
     for (uint32_t i = size; i < len; i++)
     {
