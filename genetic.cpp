@@ -9,7 +9,7 @@ public:
     board();
     board(
         std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
-        uint8_t crossoverPoint);
+        uint8_t crossoverPoint, uint16_t mutationRatio = 100);
     ~board();
 
     std::array<uint8_t, 8> rows;
@@ -32,7 +32,7 @@ board::board()
 }
 
 board::board(std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
-             uint8_t crossoverPoint)
+             uint8_t crossoverPoint, uint16_t mutationRatio)
 {
     // Populates our board
     for (uint8_t i = 0; i < crossoverPoint; i++)
@@ -42,6 +42,10 @@ board::board(std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
     for (uint8_t i = crossoverPoint; i < rows.size(); i++)
     {
         rows[i] = (*parent2)[i];
+    }
+    if (1 == (std::rand() / ((RAND_MAX + 1u) / mutationRatio)))
+    {
+        mutate();
     }
 
     checkFitness();
