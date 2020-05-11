@@ -4,19 +4,22 @@
 Serial pc(PA_2, PA_3); // TX, RX
 DigitalOut myled(PC_13);
 AnalogIn noise(PB_1);
+Timer t;
 
 int main()
 {
     uint16_t val = noise.read_u16();
     std::srand(val);
 
-    population pop(10);
+    t.start();
+
+    population pop(150);
 
     int epochs = 0;
 
     while (pop.boards[0].fitness != 0)
     {
-        printf("Fitest: ");
+        printf("Fittest: ");
         for (auto &i : pop.boards[0].rows)
         {
             printf(" %u", i);
@@ -29,7 +32,7 @@ int main()
         }
         printf(" fitness: %u\r\n", pop.boards.back().fitness);
 
-        pop.reproduce(20);
+        pop.reproduce(100);
         pop.selection();
         epochs++;
     }
@@ -38,4 +41,8 @@ int main()
     {
         printf(" %u", i);
     }
+
+    t.stop();
+
+    printf(" time: %fs", t.read());
 }
