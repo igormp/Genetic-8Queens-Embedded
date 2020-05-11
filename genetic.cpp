@@ -122,14 +122,14 @@ class population
 {
 public:
     population();
-    population(uint8_t size);
+    population(uint32_t size);
     ~population();
 
     std::vector<board> boards;
     uint8_t size;
 
     void sortPopulation();
-    void reproduce(uint8_t amount = 50);
+    void reproduce(uint32_t amount = 50);
     void selection();
 };
 
@@ -137,7 +137,7 @@ population::population() : population(50)
 {
 }
 
-population::population(uint8_t size)
+population::population(uint32_t size)
 {
     this->size = size;
     for (auto i = 0; i < size; i++)
@@ -161,7 +161,7 @@ void population::sortPopulation()
         });
 }
 
-void population::reproduce(uint8_t amount)
+void population::reproduce(uint32_t amount)
 {
     auto populationSize = boards.size();
 
@@ -180,9 +180,9 @@ void population::reproduce(uint8_t amount)
 
 void population::selection()
 {
-    auto len = boards.size();
+    uint32_t len = boards.size();
 
-    for (auto i = size; i < len; i++)
+    for (uint32_t i = size; i < len; i++)
     {
         boards.pop_back();
     }
