@@ -34,8 +34,6 @@ board::board()
 board::board(std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
              uint8_t crossoverPoint)
 {
-    //uint8_t crossoverPoint = 1 + (std::rand() / ((RAND_MAX + 1u) / 7));
-
     // Populates our board
     for (uint8_t i = 0; i < crossoverPoint; i++)
     {
@@ -119,14 +117,24 @@ void board::mutate()
 class population
 {
 public:
-    std::vector<board> boards;
-    population(uint8_t size = 50);
+    population();
+    population(uint8_t size);
     ~population();
+
+    std::vector<board> boards;
+    uint8_t size;
+
     void sortPopulation();
+    void reproduce(uint8_t amount = 50);
 };
+
+population::population() : population(50)
+{
+}
 
 population::population(uint8_t size)
 {
+    this->size = size;
     for (auto i = 0; i < size; i++)
     {
         board temp;
@@ -146,4 +154,21 @@ void population::sortPopulation()
         boards.begin(), boards.end(), [](board a, board b) {
             return a.fitness < b.fitness;
         });
+}
+
+void population::reproduce(uint8_t amount)
+{
+    auto populationSize = boards.size();
+
+    for (auto i = 0; i < amount; i++)
+    {
+        auto first = (std::rand() / ((RAND_MAX + 1u) / populationSize));
+        auto second = (std::rand() / ((RAND_MAX + 1u) / populationSize));
+
+        uint8_t crossoverPoint = 1 + (std::rand() / ((RAND_MAX + 1u) / 7));
+
+        board temp(&(boards[first].rows), &(boards[second].rows), crossoverPoint);
+        boards.push_back(temp);
+    }
+    sortPopulation();
 }
