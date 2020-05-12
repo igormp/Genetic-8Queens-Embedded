@@ -225,9 +225,6 @@ C_FLAGS += -DTARGET_FF_MORPHO
 C_FLAGS += -DDEVICE_SERIAL_FC=1
 C_FLAGS += -DTARGET_RELEASE
 C_FLAGS += -DTOOLCHAIN_GCC_ARM
-C_FLAGS += -include
-C_FLAGS += mbed_config.h
-C_FLAGS += -std=gnu11
 C_FLAGS += -c
 C_FLAGS += -Wall
 C_FLAGS += -Wextra
@@ -243,6 +240,7 @@ C_FLAGS += -fno-delete-null-pointer-checks
 C_FLAGS += -fomit-frame-pointer
 C_FLAGS += -Os
 C_FLAGS += -flto
+C_FLAGS += --specs=nano.specs
 C_FLAGS += -g
 C_FLAGS += -DMBED_TRAP_ERRORS_ENABLED=1
 C_FLAGS += -mcpu=cortex-m3
@@ -304,11 +302,6 @@ CXX_FLAGS += -DTARGET_FF_MORPHO
 CXX_FLAGS += -DDEVICE_SERIAL_FC=1
 CXX_FLAGS += -DTARGET_RELEASE
 CXX_FLAGS += -DTOOLCHAIN_GCC_ARM
-CXX_FLAGS += -include
-CXX_FLAGS += mbed_config.h
-CXX_FLAGS += -std=gnu++14
-CXX_FLAGS += -fno-rtti
-CXX_FLAGS += -Wvla
 CXX_FLAGS += -c
 CXX_FLAGS += -Wall
 CXX_FLAGS += -Wextra
@@ -324,6 +317,7 @@ CXX_FLAGS += -fno-delete-null-pointer-checks
 CXX_FLAGS += -fomit-frame-pointer
 CXX_FLAGS += -Os
 CXX_FLAGS += -flto
+CXX_FLAGS += --specs=nano.specs
 CXX_FLAGS += -g
 CXX_FLAGS += -DMBED_TRAP_ERRORS_ENABLED=1
 CXX_FLAGS += -mcpu=cortex-m3
@@ -346,8 +340,6 @@ ASM_FLAGS += -I../mbed/hal
 ASM_FLAGS += -I../mbed/platform
 ASM_FLAGS += -include
 ASM_FLAGS += /filer/workspace_data/exports/2/25f6a67b94e867c081cfef41078c12ac/Nucleo_blink_led/mbed_config.h
-ASM_FLAGS += -x
-ASM_FLAGS += assembler-with-cpp
 ASM_FLAGS += -c
 ASM_FLAGS += -Wall
 ASM_FLAGS += -Wextra
@@ -363,6 +355,7 @@ ASM_FLAGS += -fno-delete-null-pointer-checks
 ASM_FLAGS += -fomit-frame-pointer
 ASM_FLAGS += -Os
 ASM_FLAGS += -flto
+ASM_FLAGS += --specs=nano.specs
 ASM_FLAGS += -g
 ASM_FLAGS += -DMBED_TRAP_ERRORS_ENABLED=1
 ASM_FLAGS += -mcpu=cortex-m3
