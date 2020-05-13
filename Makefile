@@ -50,6 +50,9 @@ PROJECT := GA-8Queens
 # Objects and Paths
 
 OBJECTS += main.o
+OBJECTS += mcufriend_24_tft_lcd/ili9328.o
+OBJECTS += mcufriend_24_tft_lcd/lcd_base.o
+OBJECTS += mcufriend_24_tft_lcd/terminus.o
 
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F103RB/TOOLCHAIN_GCC_ARM/PeripheralPins.o
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F103RB/TOOLCHAIN_GCC_ARM/analogin_api.o
@@ -147,6 +150,7 @@ OBJECTS += main.o
  SYS_OBJECTS += mbed/TARGET_NUCLEO_F103RB/TOOLCHAIN_GCC_ARM/us_ticker.o
 
 INCLUDE_PATHS += -I../.
+INCLUDE_PATHS += -I../mcufriend_24_tft_lcd
 INCLUDE_PATHS += -I..//usr/src/mbed-sdk
 INCLUDE_PATHS += -I../mbed
 INCLUDE_PATHS += -I../mbed/TARGET_NUCLEO_F103RB/TOOLCHAIN_GCC_ARM
@@ -162,13 +166,13 @@ LINKER_SCRIPT ?= ../mbed/TARGET_NUCLEO_F103RB/TOOLCHAIN_GCC_ARM/STM32F103XB.ld
 ###############################################################################
 # Tools and Flags
 
-AS      = echo a; arm-none-eabi-gcc
+AS      = arm-none-eabi-gcc
 CC      = arm-none-eabi-gcc
 #CPP     = clang++ -v -c --target=arm-none-eabi -march=armv7-m -mcpu=cortex-m3
 CPP     = arm-none-eabi-g++
-LD      = echo b; arm-none-eabi-gcc
-ELF2BIN = echo c; arm-none-eabi-objcopy
-PREPROC = echo d; arm-none-eabi-cpp -E -P -Wl,--gc-sections -Wl,--wrap,main -Wl,--wrap,_malloc_r -Wl,--wrap,_free_r -Wl,--wrap,_realloc_r -Wl,--wrap,_memalign_r -Wl,--wrap,_calloc_r -Wl,--wrap,exit -Wl,--wrap,atexit -Wl,-n -mcpu=cortex-m3 -mthumb -DMBED_BOOT_STACK_SIZE=4096 -DXIP_ENABLE=0
+LD      = arm-none-eabi-gcc
+ELF2BIN = arm-none-eabi-objcopy
+PREPROC = arm-none-eabi-cpp -E -P -Wl,--gc-sections -Wl,--wrap,main -Wl,--wrap,_malloc_r -Wl,--wrap,_free_r -Wl,--wrap,_realloc_r -Wl,--wrap,_memalign_r -Wl,--wrap,_calloc_r -Wl,--wrap,exit -Wl,--wrap,atexit -Wl,-n -mcpu=cortex-m3 -mthumb -DMBED_BOOT_STACK_SIZE=4096 -DXIP_ENABLE=0
 
 
 C_FLAGS += -std=gnu11
@@ -181,7 +185,6 @@ C_FLAGS += -DCOMPONENT_PSA_SRV_IMPL=1
 C_FLAGS += -DTARGET_FAMILY_STM32
 C_FLAGS += -DDEVICE_SPISLAVE=1
 C_FLAGS += -D__CORTEX_M3
-C_FLAGS += -DMBED_BUILD_TIMESTAMP=1589196540.314494
 C_FLAGS += -DDEVICE_RTC=1
 C_FLAGS += -DTARGET_NAME=NUCLEO_F103RB
 C_FLAGS += -DDEVICE_PWMOUT=1
@@ -258,7 +261,6 @@ CXX_FLAGS += -DCOMPONENT_PSA_SRV_IMPL=1
 CXX_FLAGS += -DTARGET_FAMILY_STM32
 CXX_FLAGS += -DDEVICE_SPISLAVE=1
 CXX_FLAGS += -D__CORTEX_M3
-CXX_FLAGS += -DMBED_BUILD_TIMESTAMP=1589196540.314494
 CXX_FLAGS += -DDEVICE_RTC=1
 CXX_FLAGS += -DTARGET_NAME=NUCLEO_F103RB
 CXX_FLAGS += -DDEVICE_PWMOUT=1
@@ -338,6 +340,7 @@ ASM_FLAGS += -I../mbed/TARGET_NUCLEO_F103RB/TOOLCHAIN_GCC_ARM
 ASM_FLAGS += -I../mbed/drivers
 ASM_FLAGS += -I../mbed/hal
 ASM_FLAGS += -I../mbed/platform
+ASM_FLAGS += -I../mcufriend_24_tft_lcd
 ASM_FLAGS += -include
 ASM_FLAGS += /filer/workspace_data/exports/2/25f6a67b94e867c081cfef41078c12ac/Nucleo_blink_led/mbed_config.h
 ASM_FLAGS += -c
