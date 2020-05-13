@@ -68,7 +68,7 @@ void board::checkFitness()
     }
 
     // Increases fitness for every queen in a row
-    for (auto i = 0; i < values.size(); i++)
+    for (unsigned int i = 0; i < values.size(); i++)
     {
         if (values[i] > 1)
         {
@@ -77,7 +77,7 @@ void board::checkFitness()
     }
 
     // Increases fitness for every queen in a diagonal
-    for (auto i = 0; i < rows.size(); i++)
+    for (unsigned int i = 0; i < rows.size(); i++)
     {
         if (rows[i] < 7)
         {
@@ -140,7 +140,7 @@ population::population() : population(50)
 population::population(uint32_t size)
 {
     this->size = size;
-    for (auto i = 0; i < size; i++)
+    for (uint32_t i = 0; i < size; i++)
     {
         board temp;
         boards.push_back(temp);
@@ -165,7 +165,7 @@ void population::reproduce(uint32_t amount)
 {
     auto populationSize = boards.size();
 
-    for (auto i = 0; i < amount; i++)
+    for (uint32_t i = 0; i < amount; i++)
     {
         auto first = (std::rand() / ((RAND_MAX + 1u) / populationSize));
         auto second = (std::rand() / ((RAND_MAX + 1u) / populationSize));
