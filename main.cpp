@@ -2,10 +2,8 @@
 #include "genetic.cpp"
 #include "mbed.h"
 #include "ILI9341.h"
-#include "string"
 #include "Arial12x12.h"
 #include "Arial24x23.h"
-#include "Arial43x48_numb.h"
 
 Serial pc(PA_2, PA_3); // TX, RX
 
