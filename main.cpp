@@ -57,7 +57,7 @@ int main()
 
     myLCD.set_orientation(dispOrient);
 
-    myLed = 1;
+    myLed = 0;
 
     myLCD.background(bgColor); // set background to black
     myLCD.foreground(fgColor); // set chars to white
@@ -97,6 +97,8 @@ int main()
     }
 
     t.stop();
+
+    myLed = 0;
 
     myLCD.locate(0, 0);
     myLCD.printf("Epoch: %d\nBest fitness: %u\n", epochs, pop.boards[0].fitness);
