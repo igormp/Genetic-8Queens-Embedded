@@ -8,7 +8,7 @@ class board
 public:
     board();
     board(
-        std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
+        std::array<uint8_t, 8> const &parent1, std::array<uint8_t, 8> const &parent2,
         uint8_t crossoverPoint, uint16_t mutationRatio = 10);
     ~board();
 
@@ -31,17 +31,17 @@ board::board()
     checkFitness();
 }
 
-board::board(std::array<uint8_t, 8> *parent1, std::array<uint8_t, 8> *parent2,
+board::board(std::array<uint8_t, 8> const &parent1, std::array<uint8_t, 8> const &parent2,
              uint8_t crossoverPoint, uint16_t mutationRatio)
 {
     // Populates our board
     for (uint8_t i = 0; i < crossoverPoint; i++)
     {
-        rows[i] = (*parent1)[i];
+        rows[i] = parent1[i];
     }
     for (uint8_t i = crossoverPoint; i < rows.size(); i++)
     {
-        rows[i] = (*parent2)[i];
+        rows[i] = parent2[i];
     }
     if (1 == (std::rand() / ((RAND_MAX + 1u) / mutationRatio)))
     {
@@ -172,7 +172,7 @@ void population::reproduce(uint32_t amount)
 
         uint8_t crossoverPoint = 1 + (std::rand() / ((RAND_MAX + 1u) / 7));
 
-        board temp(&(boards[first].rows), &(boards[second].rows), crossoverPoint);
+        board temp((boards[first].rows), (boards[second].rows), crossoverPoint);
         boards.push_back(temp);
     }
     sortPopulation();
