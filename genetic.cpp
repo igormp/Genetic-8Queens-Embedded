@@ -34,7 +34,8 @@ board::board()
 board::board(std::array<uint8_t, 8> const &parent1, std::array<uint8_t, 8> const &parent2,
              uint8_t crossoverPoint, uint16_t mutationRatio)
 {
-    // Populates our board
+    // Merges the beggining of the first parent with the remaning of our
+    // second parent into our new individual
     for (uint8_t i = 0; i < crossoverPoint; i++)
     {
         rows[i] = parent1[i];
