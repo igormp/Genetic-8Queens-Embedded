@@ -91,7 +91,7 @@ int main()
         myLCD.printf("Epoch: %d\nBest fitness: %u\n", epochs, pop.boards[0].fitness);
 
         pop.reproduce(100);
-        pop.selection();
+        pop.purge();
         epochs++;
         myLed != myLed;
     }

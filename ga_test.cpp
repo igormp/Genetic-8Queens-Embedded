@@ -33,7 +33,7 @@ int main()
         pc.printf(" fitness: %u\r\n", pop.boards.back().fitness);
 
         pop.reproduce(100);
-        pop.selection();
+        pop.purge();
         epochs++;
         myled != myled;
     }

@@ -32,7 +32,7 @@ int main(int argc, char const *argv[])
         std::cout << " fitness: " << unsigned(pop.boards.back().fitness) << std::endl;
 
         pop.reproduce(y);
-        pop.selection();
+        pop.purge();
         epochs++;
     }
     std::cout << "Took " << epochs << " epochs ";

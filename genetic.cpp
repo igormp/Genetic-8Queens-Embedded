@@ -59,7 +59,7 @@ void board::checkFitness()
 {
     fitness = 0;
 
-    // Hashtable to easily verify queens on the same row
+    // Hashtable to easily verify queens on the same column
     std::array<uint8_t, 8> values;
     values.fill(0);
     for (uint8_t i = 0; i < rows.size(); i++)
@@ -67,7 +67,7 @@ void board::checkFitness()
         values[rows[i]]++;
     }
 
-    // Increases fitness for every queen in a row
+    // Increases fitness for every queen in the same column
     for (unsigned int i = 0; i < values.size(); i++)
     {
         if (values[i] > 1)
@@ -130,7 +130,7 @@ public:
 
     void sortPopulation();
     void reproduce(uint32_t amount = 50);
-    void selection();
+    void purge();
 };
 
 population::population() : population(50)
@@ -178,7 +178,7 @@ void population::reproduce(uint32_t amount)
     sortPopulation();
 }
 
-void population::selection()
+void population::purge()
 {
     uint32_t len = boards.size();
 
